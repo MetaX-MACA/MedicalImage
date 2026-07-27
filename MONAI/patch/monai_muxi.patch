@@ -1,0 +1,263 @@
+#Copyright (c) 2026 MetaX Integrated Circuits (Shanghai) Co., Ltd. All rights reserved.
+diff --git a/monai/csrc/resample/pushpull_cuda.cu b/monai/csrc/resample/pushpull_cuda.cu
+index 461962cb..6b5d7eed 100644
+--- a/monai/csrc/resample/pushpull_cuda.cu
++++ b/monai/csrc/resample/pushpull_cuda.cu
+@@ -36,7 +36,7 @@ limitations under the License.
+ // . [DONE] second order gradients (backward pass for spatial gradients)
+ // . performance tests
+ // . input bound/inter are always vectors -> clean unused constructors
+-
++// Copyright (c) 2026 MetaX Integrated Circuits (Shanghai) Co., Ltd. All rights reserved.
+ #include <ATen/ATen.h>
+ #include <limits>
+ #include <tuple>
+@@ -575,7 +575,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+ 
+     // Loop over voxels that belong to one CUDA block
+     // This function is called by the CUDA kernel
+-    MONAI_DEVICE void loop(int threadIdx, int blockIdx, int blockDim, int gridDim) const;
++    MONAI_INLINE MONAI_DEVICE void loop(int threadIdx, int blockIdx, int blockDim, int gridDim) const;
+ 
+     MONAI_HOST MONAI_DEVICE int64_t voxcount() const {
+       return N * trgt_X * trgt_Y * trgt_Z;
+@@ -583,32 +583,32 @@ MONAI_NAMESPACE_DEVICE { // cuda
+ 
+    private:
+     // ~~~ COMPONENTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-    MONAI_DEVICE void check1d(offset_t w, offset_t n) const;
+-    MONAI_DEVICE void check2d(offset_t w, offset_t h, offset_t n) const;
+-    MONAI_DEVICE void check3d(offset_t w, offset_t h, offset_t d, offset_t n) const;
+-    MONAI_DEVICE void interpolate1d(scalar_t x, offset_t w, offset_t n) const;
+-    MONAI_DEVICE void interpolate1d_nearest(scalar_t x, offset_t w, offset_t n) const;
+-    MONAI_DEVICE void interpolate1d_linear(scalar_t x, offset_t w, offset_t n) const;
+-    MONAI_DEVICE void interpolate1d_sliding(scalar_t x, offset_t w, offset_t n) const { /*TODO*/
++    MONAI_INLINE MONAI_DEVICE void check1d(offset_t w, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void check2d(offset_t w, offset_t h, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void check3d(offset_t w, offset_t h, offset_t d, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate1d(scalar_t x, offset_t w, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate1d_nearest(scalar_t x, offset_t w, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate1d_linear(scalar_t x, offset_t w, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate1d_sliding(scalar_t x, offset_t w, offset_t n) const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate1d_sliding_nearest(scalar_t x, offset_t w, offset_t n) const { /*TODO*/
++    MONAI_INLINE MONAI_DEVICE void interpolate1d_sliding_nearest(scalar_t x, offset_t w, offset_t n) const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate1d_sliding_linear(scalar_t x, offset_t w, offset_t n) const { /*TODO*/
++    MONAI_INLINE MONAI_DEVICE void interpolate1d_sliding_linear(scalar_t x, offset_t w, offset_t n) const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate2d(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const;
+-    MONAI_DEVICE void interpolate2d_nearest(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const;
+-    MONAI_DEVICE void interpolate2d_bilinear(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const;
+-    MONAI_DEVICE void interpolate2d_sliding(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const { /*TODO*/
++    MONAI_INLINE MONAI_DEVICE void interpolate2d(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate2d_nearest(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate2d_bilinear(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const;
++    MONAI_INLINE MONAI_DEVICE void interpolate2d_sliding(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n) const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate2d_sliding_nearest(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n)
++    MONAI_INLINE MONAI_DEVICE void interpolate2d_sliding_nearest(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n)
+         const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate2d_sliding_bilinear(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n)
++    MONAI_INLINE MONAI_DEVICE void interpolate2d_sliding_bilinear(scalar_t x, scalar_t y, offset_t w, offset_t h, offset_t n)
+         const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate3d(scalar_t x, scalar_t y, scalar_t z, offset_t w, offset_t h, offset_t d, offset_t n)
++    MONAI_INLINE MONAI_DEVICE void interpolate3d(scalar_t x, scalar_t y, scalar_t z, offset_t w, offset_t h, offset_t d, offset_t n)
+         const;
+-    MONAI_DEVICE void interpolate3d_nearest(
++    MONAI_INLINE MONAI_DEVICE void interpolate3d_nearest(
+         scalar_t x,
+         scalar_t y,
+         scalar_t z,
+@@ -616,7 +616,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+         offset_t h,
+         offset_t d,
+         offset_t n) const;
+-    MONAI_DEVICE void interpolate3d_trilinear(
++    MONAI_INLINE MONAI_DEVICE void interpolate3d_trilinear(
+         scalar_t x,
+         scalar_t y,
+         scalar_t z,
+@@ -624,7 +624,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+         offset_t h,
+         offset_t d,
+         offset_t n) const;
+-    MONAI_DEVICE void interpolate3d_sliding(
++    MONAI_INLINE MONAI_DEVICE void interpolate3d_sliding(
+         scalar_t x,
+         scalar_t y,
+         scalar_t z,
+@@ -633,7 +633,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+         offset_t d,
+         offset_t n) const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate3d_sliding_nearest(
++    MONAI_INLINE MONAI_DEVICE void interpolate3d_sliding_nearest(
+         scalar_t x,
+         scalar_t y,
+         scalar_t z,
+@@ -642,7 +642,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+         offset_t d,
+         offset_t n) const { /*TODO*/
+     }
+-    MONAI_DEVICE void interpolate3d_sliding_trilinear(
++    MONAI_INLINE MONAI_DEVICE void interpolate3d_sliding_trilinear(
+         scalar_t x,
+         scalar_t y,
+         scalar_t z,
+@@ -717,7 +717,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::loop(int threadIdx, int blockIdx, int blockDim, int gridDim)
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::loop(int threadIdx, int blockIdx, int blockDim, int gridDim)
+       const {
+     int64_t index = blockIdx * blockDim + threadIdx;
+     int64_t nthreads = voxcount();
+@@ -749,7 +749,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // 3) check if the source coordinate is in bounds
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::check3d(offset_t w, offset_t h, offset_t d, offset_t n) const {
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::check3d(offset_t w, offset_t h, offset_t d, offset_t n) const {
+     // get the corresponding input x, y, z co-ordinates from grid
+     scalar_t* grid_ptr_NXYZ = grid_ptr + n * grid_sN + w * grid_sX + h * grid_sY + d * grid_sZ;
+     scalar_t x = *grid_ptr_NXYZ;
+@@ -802,7 +802,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   }
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::check2d(offset_t w, offset_t h, offset_t n) const {
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::check2d(offset_t w, offset_t h, offset_t n) const {
+     // get the corresponding input x, y, z co-ordinates from grid
+     scalar_t* grid_ptr_NXY = grid_ptr + n * grid_sN + w * grid_sX + h * grid_sY;
+     scalar_t x = *grid_ptr_NXY;
+@@ -850,7 +850,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   }
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::check1d(offset_t w, offset_t n) const {
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::check1d(offset_t w, offset_t n) const {
+     // get the corresponding input x, y, z co-ordinates from grid
+     scalar_t* grid_ptr_NX = grid_ptr + n * grid_sN + w * grid_sX;
+     scalar_t x = *grid_ptr_NX;
+@@ -900,7 +900,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate3d(
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate3d(
+       scalar_t x,
+       scalar_t y,
+       scalar_t z,
+@@ -1114,7 +1114,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate2d(
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate2d(
+       scalar_t x,
+       scalar_t y,
+       offset_t w,
+@@ -1293,7 +1293,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate1d(scalar_t x, offset_t w, offset_t n) const {
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate1d(scalar_t x, offset_t w, offset_t n) const {
+     // Get corner pixel values from (x, y)
+     offset_t bx0, bx1;
+     interpolation::bounds(interpolation0, x, bx0, bx1);
+@@ -1437,7 +1437,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate3d_trilinear(
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate3d_trilinear(
+       scalar_t x,
+       scalar_t y,
+       scalar_t z,
+@@ -1719,7 +1719,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate2d_bilinear(
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate2d_bilinear(
+       scalar_t x,
+       scalar_t y,
+       offset_t w,
+@@ -1899,7 +1899,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate1d_linear(scalar_t x, offset_t w, offset_t n) const {
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate1d_linear(scalar_t x, offset_t w, offset_t n) const {
+     // Get corner pixel values from (x)
+     offset_t ix0 = static_cast<offset_t>(std::floor(x));
+ 
+@@ -2009,7 +2009,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate3d_nearest(
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate3d_nearest(
+       scalar_t x,
+       scalar_t y,
+       scalar_t z,
+@@ -2057,7 +2057,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate2d_nearest(
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate2d_nearest(
+       scalar_t x,
+       scalar_t y,
+       offset_t w,
+@@ -2100,7 +2100,7 @@ MONAI_NAMESPACE_DEVICE { // cuda
+   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+   template <typename scalar_t, typename offset_t>
+-  MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate1d_nearest(scalar_t x, offset_t w, offset_t n) const {
++  MONAI_INLINE MONAI_DEVICE void PushPullImpl<scalar_t, offset_t>::interpolate1d_nearest(scalar_t x, offset_t w, offset_t n) const {
+     offset_t i = static_cast<offset_t>(std::round(x));
+ 
+     // Boundary condition (/!\ compute sign before warping indices)
+diff --git a/monai/networks/layers/filtering.py b/monai/networks/layers/filtering.py
+index c48c77cf..319cbe52 100644
+--- a/monai/networks/layers/filtering.py
++++ b/monai/networks/layers/filtering.py
+@@ -8,7 +8,7 @@
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+-
++# Copyright (c) 2026 MetaX Integrated Circuits (Shanghai) Co., Ltd. All rights reserved.
+ from __future__ import annotations
+ 
+ import torch
+@@ -50,7 +50,10 @@ class BilateralFilter(torch.autograd.Function):
+         ctx.ss = spatial_sigma
+         ctx.cs = color_sigma
+         ctx.fa = fast_approx
+-        output_data = _C.bilateral_filter(input, spatial_sigma, color_sigma, fast_approx)
++        if input.is_contiguous():
++            output_data = _C.bilateral_filter(input, spatial_sigma, color_sigma, fast_approx)
++        else:
++            output_data = _C.bilateral_filter(input.contiguous(), spatial_sigma, color_sigma, fast_approx)
+         if torch.cuda.is_available():
+             torch.cuda.synchronize()
+         return output_data
+@@ -59,7 +62,10 @@ class BilateralFilter(torch.autograd.Function):
+     def backward(ctx, grad_output):
+         """autograd backward"""
+         spatial_sigma, color_sigma, fast_approx = ctx.ss, ctx.cs, ctx.fa
+-        grad_input = _C.bilateral_filter(grad_output, spatial_sigma, color_sigma, fast_approx)
++        if grad_output.is_contiguous():
++            grad_input = _C.bilateral_filter(grad_output, spatial_sigma, color_sigma, fast_approx)
++        else:
++            grad_input = _C.bilateral_filter(grad_output.contiguous(), spatial_sigma, color_sigma, fast_approx)
+         return grad_input, None, None, None
+ 
+ 

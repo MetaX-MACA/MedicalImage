@@ -1,0 +1,8 @@
+# Copyright (c) 2026 MetaX Integrated Circuits (Shanghai) Co., Ltd. All rights reserved.
+monai_muxi.patch 修改说明
+
+1. 文件 `/monai/csrc/resample/pushpull_cuda.cu`  
+   将 `MONAI_DEVICE` 宏替换为 `MONAI_INLINE MONAI_DEVICE`，以减少 GPU 私有内存（Private Memory）的占用。
+
+2. 文件 `/monai/networks/layers/filtering.py`  
+   在 MACA PyTorch 框架下，部分张量的内存可能不连续，导致后续调用 `tensor.view()` 失败。本次修改会强制将这些张量转换为连续内存布局，从而保证正常执行。
