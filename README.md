@@ -12,7 +12,16 @@
 
 | 子目录 | 项目简介 | 主要领域 |
 |---|---|---|
-| **MONAI** | MONAI核心框架的沐曦GPU适配版本，提供医学影像专用的数据处理、变换方法与网络架构。 | 影像分割、分类、配准、生成建模 |
+| **[MONAI](https://github.com/MetaX-MACA/MedicalImage/tree/main/MONAI)** | MONAI核心框架的沐曦GPU适配版本，提供医学影像专用的数据处理、变换方法与网络架构。 | 影像分割、分类、配准、生成建模 |
+| **[MedSAM](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/MedSAM)**|专为医学图像分割设计的 Segment Anything 模型变体。| 影像分割 |
+| **[MedSAM2](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/MedSAM2)**|面向3D图像与视频分割的可提示分割基础模型。| 影像分割 |
+| **[nnInteractive](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/nnInteractive)**|三维交互式分割模型，支持点、涂抹、边界框以及套索等多种提示方式。。| 影像分割 |
+| **[nnUNet](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/nnUNet)**|针对特定数据集自动适配流程的语义分割框架。自动配置最合适的`U-Net`变体，并提供从数据预处理、模型训练、模型筛选到推理预测的一站式端到端解决方案。| 影像分割 |
+| **[SAM-Med3D](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/SAM-Med3D)**|面向三维医学图像的通用分割模型。| 影像分割 |
+| **[TotalSegmentatorV2](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/TotalSegmentatorV2)**|基于**nnUNet**模型的CT图像分割工具。| 影像分割 |
+| **[vista3d](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/vista3d)**|三维医学影像分割基础模型。| 影像分割 |
+
+
 
 
 > 更多模型和应用正在持续适配与添加中，敬请关注。
