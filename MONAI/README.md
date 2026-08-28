@@ -135,9 +135,10 @@ clearml version: 2.1.10
 ```
 
 
-## 三、spleen_ct_segmentation在沐曦GPU上的训练结果
+## 三、沐曦GPU运行[MONAI Model Zoo](https://github.com/Project-MONAI/model-zoo/tree/dev)
+MONAI Model Zoo 以 MONAI Bundle 格式收录了一系列医学影像模型。具体的模型列表参见[https://project-monai.github.io/model-zoo.html](https://project-monai.github.io/model-zoo.html)。沐曦GPU支持运行MONAI Model Zoo。本章节仅展示其中的[spleen_ct_segmentation](https://github.com/Project-MONAI/model-zoo/tree/dev/models/spleen_ct_segmentation)模型在沐曦GPU上的训练和推理过程。
 ### 3.1 模型简介
-该模型来自[MONAI Model Zoo](https://github.com/Project-MONAI/model-zoo/tree/dev),用于 CT 图像脾脏三维分割，采用 [MONAI Bundle](https://monai.readthedocs.io/en/stable/bundle_intro.html) 格式打包。数据集为[Medical Segmentation Decathlon Challenge 2018](http://medicaldecathlon.com/)。详细介绍及使用说明请参见[spleen_ct_segmentation](https://github.com/Project-MONAI/model-zoo/tree/dev/models/spleen_ct_segmentation)
+[spleen_ct_segmentation](https://github.com/Project-MONAI/model-zoo/tree/dev/models/spleen_ct_segmentation)模型用于 CT 图像脾脏三维分割，训练数据集为[Medical Segmentation Decathlon Challenge 2018](http://medicaldecathlon.com/)。详细介绍及运行命令请参考[spleen_ct_segmentation](https://github.com/Project-MONAI/model-zoo/tree/dev/models/spleen_ct_segmentation)
 
 ### 3.2 Loss 曲线
 <div align="center">
@@ -157,14 +158,13 @@ clearml version: 2.1.10
 ### 3.4 沐曦 GPU 推理结果
 使用沐曦 GPU 训练完成的模型进行脾脏分割推理，部分结果如下图所示（从左至右依次为病例 7、11、50、58 的 CT 图像与预测掩膜叠加）。
 
-<div align="center">
-  <img src="imgs/spleen_7_with_mask.png" width="300" style="object-fit: contain; background: white;">
-  <img src="imgs/spleen_11_with_mask.png" width="300" style="object-fit: contain; background: white;">
-  <img src="imgs/spleen_50_with_mask.png" width="300" style="object-fit: contain; background: white;">
-  <img src="imgs/spleen_58_with_mask.png" width="300" style="object-fit: contain; background: white;">
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: center; width: 100%;">
+  <img src="imgs/spleen_7_with_mask.png" alt="" style="width: 100%; height: auto; object-fit: contain; background: white;">
+  <img src="imgs/spleen_11_with_mask.png" alt="" style="width: 100%; height: auto; object-fit: contain; background: white;">
+  <img src="imgs/spleen_50_with_mask.png" alt="" style="width: 100%; height: auto; object-fit: contain; background: white;">
+  <img src="imgs/spleen_58_with_mask.png" alt="" style="width: 100%; height: auto; object-fit: contain; background: white;">
 </div>
-
-
 
 
 ## 四、常见问题与注意事项

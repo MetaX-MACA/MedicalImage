@@ -20,6 +20,7 @@
 | **[SAM-Med3D](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/SAM-Med3D)**|面向三维医学图像的通用分割模型。| 影像分割 |
 | **[TotalSegmentatorV2](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/TotalSegmentatorV2)**|基于**nnUNet**模型的CT图像分割工具。| 影像分割 |
 | **[vista3d](https://github.com/Metax-MACA/MedicalImage/tree/main/segmentation/vista3d)**|三维医学影像分割基础模型。| 影像分割 |
+| **[prov-gigapath](https://github.com/Metax-MACA/MedicalImage/tree/main/patholopy/prov-gigapath)** | 全切片病理基础模型 | 病理学 |
 
 
 
